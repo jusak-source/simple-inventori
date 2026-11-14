@@ -65,6 +65,16 @@ createApp({
 
         const currentYear = new Date().getFullYear();
 
+        // Menu geser Bootstrap hanya dipakai di layar kecil. Di layar lebar sidebar tetap terlihat.
+        function closeSidebar() {
+            if (window.innerWidth >= 992 || !window.bootstrap) return;
+
+            const sidebar = document.getElementById('app-sidebar');
+            const instance = sidebar && window.bootstrap.Offcanvas.getInstance(sidebar);
+
+            if (instance) instance.hide();
+        }
+
         return {
             ...auth,
             ...inventory,
@@ -72,6 +82,7 @@ createApp({
             currentYear,
             isAdmin,
             isConfigured,
+            closeSidebar,
             sidebarOpen,
             userInitials
         };
